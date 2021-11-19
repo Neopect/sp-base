@@ -3,16 +3,12 @@
 import os
 
 confFile = []
-# id = "null"
-# secret = "null"
 spCred = []
 gPlayl = []
 playl = []
 users = []
-root = None
-rootConfig = None
 
-def genConfig():
+def genConfig(root, rootConfig):
     # Creates the basic config file for saving
     # and reading data for the program.
     print("Generating config folder...")
@@ -30,11 +26,12 @@ def genConfig():
     fw.close()
     
 
-def readConfig():
+def readConfig(root, rootConfig):
     # Reads config file and sets them
     # in the interrupter's memory
     global id, secret, confFile,  gPlayl
     os.chdir(rootConfig)
+    
     # Reads cred file
     fw = open("sp", "r")
     for x in fw:
@@ -65,20 +62,13 @@ def readConfig():
 
 
             
-def configRunner():
+def configRunner(root, rootConfig):
     # Checks for config folder
-    global root, rootConfig
-    root = os.path.dirname(os.path.abspath(__file__))
-    rootConfig = os.path.join(root, "configure")
     os.chdir(root)
 
-    # config_exists = os.path.isdir(path)
     if (os.path.isdir(rootConfig) == False):
-        genConfig()
+        genConfig(root, rootConfig)
         # quit()
     else:
-        readConfig()
+        readConfig(root, rootConfig)
 
-
-def appendData(file, data):
-    None

@@ -11,7 +11,7 @@ plist_org = []
 plist_sec = []
 plist_act = []
 plist_mas = []
-global sp
+# global sp
 userTrackLim = 50
 usersExists = None
 
@@ -28,21 +28,22 @@ usersExists = None
 #     sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=config.id,
 #                                                            client_secret=config.secret))
 
-def initSP():
-    global sp
-    try:
-        sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=config.spCred[0],
-                                                           client_secret=config.spCred[1]))
-    except:
-        print("No login data")
+
+# def initSP():
+#     global sp
+#     try:
+#         sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=config.spCred[0],
+#                                                            client_secret=config.spCred[1]))
+#     except:
+#         print("No login data")
     
 
 
-def downloadPlist(pid, name):
+def downloadPlist(sp, pid, name):
     # Creates the random playlists
     print("Downloading playlist info...")
     global plist_org
-    global sp
+    # global sp
 
     done = False
     ofs = 0
@@ -66,21 +67,11 @@ def downloadPlist(pid, name):
         else:
             done = True
 
-    random.shuffle(plist_temp)
-    plist_org.append(plist_temp)
+    # TODO Move this somewhere else vv
+    # random.shuffle(plist_temp)
+    # plist_org.append(plist_temp)
 
-def randPlists():
-    
-    print()
 
-def exceptions():
-    print()
-
-def mixComb():
-    print()
-
-def dupCheck():
-    print()
 
 def org():
     # Download the playlist tracks to json
