@@ -1,6 +1,6 @@
 # Smart-Playlist app (AKA data_runner)
 
-from . import config
+# from . import config
 import os.path
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -11,66 +11,73 @@ plist_org = []
 plist_sec = []
 plist_act = []
 plist_mas = []
-# global sp
+global sp
 userTrackLim = 50
 usersExists = None
-
-# print("Welcome to Smart-Playlist \nCreated by Tyler Moen\n")
-
-# # Checks for config folder
-# config_exists = os.path.isdir('config')
-# if (config_exists == False):
-#     config.genConfig()
-#     quit()
-# else:
-#     config.readConfig()
-#     config.formatCheck()
-#     sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=config.id,
-#                                                            client_secret=config.secret))
+   
 
 
-# def initSP():
-#     global sp
-#     try:
-#         sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=config.spCred[0],
-#                                                            client_secret=config.spCred[1]))
-#     except:
-#         print("No login data")
-    
-
-
-def downloadPlist(sp, pid, name):
+def downloadPlist(pid, name, path):
     # Creates the random playlists
     print("Downloading playlist info...")
     global plist_org
-    # global sp
+    global sp
 
-    done = False
+    # done = False
     ofs = 0
     plist_temp = []
 
-    while done == False:
+    while True:
 
         playlist_id = 'spotify:playlist:' + pid
         results = sp.playlist_tracks(playlist_id,fields="items(track(name,artists(name),id,href)),total", offset=ofs, market="US")
         
-        # fw = open("config/playlist_org_"+name+"_part_"+str(int(ofs/100))+".json", "w")
-        # fw.write(json.dumps(results, indent=4))
-        # fw.close()
+
+        
 
         print("Adding tracks to memory...")
+        dummy_def = ['default-gen']
+        dummy_def2 = ['default-mood']
         for x in range(len(results['items'])):
-            plist_temp.append([results['items'][x]['track']['name'], results['items'][x]['track']['artists'][0]['name'], results['items'][x]['track']['id']])
+            plist_temp.append([results['items'][x]['track']['name'], results['items'][x]['track']['artists'][0]['name'], results['items'][x]['track']['id'], dummy_def, dummy_def2])
 
         if results['total'] > ofs:
             ofs += 100
         else:
-            done = True
+            pathPlist = os.path.join(path, 'plists')
+            os.mkdir(pathPlist)
+            os.chdir(pathPlist)
+            # fileDir = None
+            
+            fw = open("playlist_dl_"+name+".json", "w")
+            # fw = open("plists/playlist_org_"+name+"_part_"+str(int(ofs/100))+".json", "w")
+            fw.write(json.dumps(plist_temp, indent=4))
+            fw.close()
+            break
 
     # TODO Move this somewhere else vv
     # random.shuffle(plist_temp)
     # plist_org.append(plist_temp)
 
+    return plist_temp
+
+
+
+def downloadLiked(sp):
+    pass
+
+
+def downloadConf(spI, path, updated = False, globs = True, users = True):
+    '''
+    Download mass of playlists -
+    - Parameters input: (str, bool, bool, bool)
+    '''
+    global sp 
+    sp = spI
+    testlist = downloadPlist('3PGHzE2Tqab3V5xH6JyVcW', 'glob', path)
+    jsonList = json.dumps(testlist, indent=4)
+    #print(jsonList)
+    
 
 
 def org():
