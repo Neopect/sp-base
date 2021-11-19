@@ -14,6 +14,7 @@ def genConfig(root, rootConfig):
     print("Generating config folder...")
     os.mkdir(rootConfig)
     os.chdir(rootConfig)
+    os.mkdir('plists')
 
     print("Generating config file...")
     fw = open("sp", "w")
@@ -31,7 +32,7 @@ def readConfig(root, rootConfig):
     # in the interrupter's memory
     global id, secret, confFile,  gPlayl
     os.chdir(rootConfig)
-    
+
     # Reads cred file
     fw = open("sp", "r")
     for x in fw:
