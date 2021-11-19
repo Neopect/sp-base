@@ -6,6 +6,11 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import json
 import random
+import sys
+
+sys.path.insert(0, 'src/conf')
+
+import configRW as config
 
 plist_org = []
 plist_sec = []
@@ -19,7 +24,7 @@ usersExists = None
 
 def downloadPlist(pid, name, path):
     # Creates the random playlists
-    print("Downloading playlist info...")
+    
     global plist_org
     global sp
 
@@ -28,24 +33,25 @@ def downloadPlist(pid, name, path):
     plist_temp = []
 
     while True:
-
+        print("Downloading playlist info...")
         playlist_id = 'spotify:playlist:' + pid
         results = sp.playlist_tracks(playlist_id,fields="items(track(name,artists(name),id,href)),total", offset=ofs, market="US")
         
-
-        
-
         print("Adding tracks to memory...")
-        dummy_def = ['default-gen']
-        dummy_def2 = ['default-mood']
-        for x in range(len(results['items'])):
-            plist_temp.append([results['items'][x]['track']['name'], results['items'][x]['track']['artists'][0]['name'], results['items'][x]['track']['id'], dummy_def, dummy_def2])
+        # for x in range(len(results['items'])):
+        #     plist_temp.append([results['items'][x]['track']['name'], results['items'][x]['track']['artists'][0]['name'], results['items'][x]['track']['id'], ['default-gen'], ['default-mood']])
+        # TODO Test implementation of this v
+        for item in results['items']:
+            track = item['track']
+            plist_temp.append([track['name'], track['artists'][0]['name'], track['id'], ['default-gen'], ['default-mood']])
+
 
         if results['total'] > ofs:
             ofs += 100
         else:
             pathPlist = os.path.join(path, 'plists')
-            os.mkdir(pathPlist)
+            if (os.path.isdir(pathPlist) == False):
+                os.mkdir(pathPlist)
             os.chdir(pathPlist)
             # fileDir = None
             
@@ -55,16 +61,37 @@ def downloadPlist(pid, name, path):
             fw.close()
             break
 
-    # TODO Move this somewhere else vv
-    # random.shuffle(plist_temp)
-    # plist_org.append(plist_temp)
-
     return plist_temp
 
 
 
-def downloadLiked(sp):
-    pass
+def downloadLiked(sp, path):
+    templist = []
+    def show_tracks(results):
+        for item in results['items']:
+            track = item['track']
+            # print([track['artists'][0]['name'], track['name']])
+            # print([track['name'], track['artists'][0]['name'], track['id'], ['default-gen'], ['default-mood']])
+            templist.append([track['name'], track['artists'][0]['name'], track['id'], ['default-gen'], ['default-mood']])
+
+    results = sp.current_user_saved_tracks()
+    show_tracks(results)
+
+    while results['next']:
+        results = sp.next(results)
+        show_tracks(results)
+
+    # File json gen
+    pathPlist = os.path.join(path, 'plists')
+    if (os.path.isdir(pathPlist) == False):
+        os.mkdir(pathPlist)
+    os.chdir(pathPlist)
+    # fileDir = None
+    
+    fw = open("playlist_dl_liked.json", "w")
+    # fw = open("plists/playlist_org_"+name+"_part_"+str(int(ofs/100))+".json", "w")
+    fw.write(json.dumps(templist, indent=4))
+    fw.close()
 
 
 def downloadConf(spI, path, updated = False, globs = True, users = True):
@@ -74,73 +101,14 @@ def downloadConf(spI, path, updated = False, globs = True, users = True):
     '''
     global sp 
     sp = spI
-    testlist = downloadPlist('3PGHzE2Tqab3V5xH6JyVcW', 'glob', path)
-    jsonList = json.dumps(testlist, indent=4)
-    #print(jsonList)
+
+    if globs == True:
+        for x, val in enumerate(config.gPlayl):
+            print("Opening universal playlists...")
+            downloadPlist(val, 'gobal_'+ str(x), path)
+
+    if users == True:
+        for x, val in enumerate(config.playl):
+            print("Opening personal playlists...")
+            downloadPlist(val, 'user_'+ str(x), path)
     
-
-
-def org():
-    # Download the playlist tracks to json
-    for x, val in enumerate(config.gPlayl):
-        print("Opening universal playlists...")
-        downloadPlist(val, 'uni_'+ str(x))
-        
-
-    for x, val in enumerate(config.playl):
-        print("Opening personal playlists...")
-        downloadPlist(val, 'per_'+ str(x))
-
-    plist_sec = plist_org
-    # plist_act = plist_org
-
-    # Creates a 3 day master track
-    z = 0
-    while z < 3:
-        plist_act.append(plist_sec[0][z*userTrackLim:z*userTrackLim+userTrackLim]) # Appends global playlist
-        for x in range(len(config.users)):
-            plist_act.append(plist_sec[x+1][z*userTrackLim:z*userTrackLim+userTrackLim]) # Appends part of user plist based day
-            print()
-            
-        random.shuffle(plist_act)
-        plist_mas.append([plist_act])
-
-        plist_act =[]
-        z += 1
-        
-
-    print(plist_org)
-
-def create(usersOn):
-    global plist_sec
-    global plist_act
-    global plist_mas
-    global sp
-
-    plistN = ''
-
-    plist_sec = plist_org
-    plist_act.append(plist_sec[0][:userTrackLim]) # Appends global playlist
-    for x in range(len(usersOn)):
-        if usersOn[x] == True:
-            plist_act.append(plist_sec[x+1][:userTrackLim]) # Appends part of user plist based day
-    random.shuffle(plist_act)
-    plist_mas.append([plist_act])
-
-    sp.user_playlist_create(config.spCred[0], "Work-Auto", description="Auto gen work playlist")
-    playlists = sp.user_playlists(config.spCred[0])
-    for playlist in playlists['items']:
-        print(playlist['name'])
-        if playlist['name'] == "Work-Auto":
-            plistN = playlist['name']
-    
-    length = len(plist_act)
-    seps = length / 100 + 1
-
-    z = 0
-    while z < seps:
-        sp.playlist_add_items(config.spCred[0], )
-        # plist_act.append(plist_sec[0][z*userTrackLim:z*userTrackLim+userTrackLim]) # Appends global playlist
-        # for x in range(len(config.users)):
-        #     plist_act.append(plist_sec[x+1][z*userTrackLim:z*userTrackLim+userTrackLim]) # Appends part of user plist based day
-        #     print()
