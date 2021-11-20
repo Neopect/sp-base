@@ -1,68 +1,68 @@
 import os.path
 import json
 import sys
-
 sys.path.insert(0, 'src/conf')
-
 import configRW as config
-   
 
-def downloadPlist(sp, pid, name, path):
-    # Creates the random playlists
-    
-    ofs = 0
-    plist_temp = []
+def show_tracks(results):
+    # Complies results into the proper format as a python list
 
-    while True:
-        print("Downloading playlist info...")
-        playlist_id = 'spotify:playlist:' + pid
-        results = sp.playlist_tracks(playlist_id,fields="items(track(name,artists(name),id,href)),total", offset=ofs, market="US")
-        
-        print("Adding tracks to memory...")
+        plist_temp = []
         for item in results['items']:
             track = item['track']
             plist_temp.append([track['name'], track['artists'][0]['name'], track['id'], ['default-gen'], ['default-mood']])
+        return plist_temp
 
-        # TODO See if possible to implement next feature from Liked songs
-        if results['total'] > ofs:
-            ofs += 100
-        else:
+
+
+def downloadPlist(sp, pid, name, path):
+    # Creates the random playlists
+
+    plist_temp = []
+    ofs = 0
+    
+    while True:
+        print("Downloading playlist info...")
+        results = sp.playlist_tracks(pid,
+                                    offset=ofs,
+                                    fields='playlist_id,fields="items(track(name,artists(name),id,href)),total',
+                                    market="US")
+        
+        if len(results['items']) == 0: # If no more items in list, then write to json
             os.chdir(path)
             with open("playlist_dl_"+name+".json", "w") as fw:
                 fw.write(json.dumps(plist_temp, indent=4))
             break
+        
+        print("Adding tracks to memory...")
+        plist_temp = plist_temp + show_tracks(results)
+
+        ofs = ofs + len(results['items'])
 
     return plist_temp
 
 
 
 def downloadLiked(sp, path):
+    # Downloads liked playlist
+
     plist_temp = []
-    def show_tracks(results):
-        for item in results['items']:
-            track = item['track']
-            plist_temp.append([track['name'], track['artists'][0]['name'], track['id'], ['default-gen'], ['default-mood']])
-
+    
     results = sp.current_user_saved_tracks()
-    show_tracks(results)
+    plist_temp = plist_temp + show_tracks(results)
 
-    while results['next']:
+    while results['next']: # Repeats requests until no more tracks left
         results = sp.next(results)
-        show_tracks(results)
+        plist_temp = plist_temp + show_tracks(results)
 
     os.chdir(path)
-    
     with open("playlist_dl_liked.json", "w") as fw:
         fw.write(json.dumps(plist_temp, indent=4))
 
 
+
 def downloadConf(sp, path, updated = False, globs = True, users = True):
-    '''
-    Download mass of playlists -
-    - Goes through each playlist in config and downloads it data with `downloadPlist`
-    '''
-    # global sp 
-    # sp = spI
+    # Goes through each playlist in config and downloads it data with `downloadPlist`
 
     if globs == True:
         for x, val in enumerate(config.gPlayl):
