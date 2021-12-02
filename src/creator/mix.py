@@ -1,15 +1,30 @@
-def randPlists():
-    
-    print()
+
 
 def exceptions():
-    print()
+    pass
 
-def mixComb():
-    print()
+def randPlist(plists, tracklim = 50, glob = list(), globlim = 50):
+    # Creates random playlist from set of users
+
+    # Randomize each plist
+
+    # Take $tracklim out of each list at a time & $globlim from $glob
+
+    # Randomize and return
+
+    pass
+
+
+# def mixComb():
+#     pass
+
+def dailyMix(plists, tracklim, glob, globlim, days, exceptions = False):
+    # Creates a daily mix playlist for a set number of days
+    
+    pass
 
 def dupCheck():
-    print()
+    pass
 
 
 # def org():
