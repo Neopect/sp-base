@@ -14,20 +14,6 @@
       "assignedTo": {
         "name": "tylerm"
       },
-      "category": "config",
-      "creation_time": "2021-12-02T04:00:33.077Z",
-      "description": {
-        "content": "Place everything into a single json file",
-        "mime": "text/markdown"
-      },
-      "id": "14",
-      "references": [],
-      "title": "Create Clean DB"
-    },
-    {
-      "assignedTo": {
-        "name": "tylerm"
-      },
       "category": "Algor",
       "creation_time": "2021-12-02T02:20:57.273Z",
       "id": "10",
@@ -68,6 +54,20 @@
       "assignedTo": {
         "name": "tylerm"
       },
+      "category": "config",
+      "creation_time": "2021-12-02T14:27:58.815Z",
+      "description": {
+        "content": "Update plists while retaining orginal structure",
+        "mime": "text/markdown"
+      },
+      "id": "15",
+      "references": [],
+      "title": "Update Spot data"
+    },
+    {
+      "assignedTo": {
+        "name": "tylerm"
+      },
       "category": "spot",
       "creation_time": "2021-12-02T02:16:25.816Z",
       "id": "3",
@@ -90,6 +90,20 @@
       "assignedTo": {
         "name": "tylerm"
       },
+      "category": "organ",
+      "creation_time": "2021-12-02T02:17:30.928Z",
+      "id": "5",
+      "references": [],
+      "title": "Organize Lists Structure",
+      "description": {
+        "content": "Refine: Redefine new standard",
+        "mime": "text/markdown"
+      }
+    },
+    {
+      "assignedTo": {
+        "name": "tylerm"
+      },
       "category": "Algor",
       "creation_time": "2021-12-02T02:20:43.354Z",
       "id": "9",
@@ -103,24 +117,24 @@
         "name": "tylerm"
       },
       "category": "config",
-      "creation_time": "2021-12-02T02:18:29.701Z",
-      "id": "6",
+      "creation_time": "2021-12-02T04:00:33.077Z",
+      "description": {
+        "content": "Place everything into a single json file",
+        "mime": "text/markdown"
+      },
+      "id": "14",
       "references": [],
-      "title": "Create Config"
+      "title": "Create Clean DB"
     },
     {
       "assignedTo": {
         "name": "tylerm"
       },
-      "category": "organ",
-      "creation_time": "2021-12-02T02:17:30.928Z",
-      "id": "5",
+      "category": "config",
+      "creation_time": "2021-12-02T02:18:29.701Z",
+      "id": "6",
       "references": [],
-      "title": "Organize Lists Structure",
-      "description": {
-        "content": "Refine: Redefine new standard",
-        "mime": "text/markdown"
-      }
+      "title": "Create Config"
     },
     {
       "assignedTo": {

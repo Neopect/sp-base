@@ -1,0 +1,16 @@
+Spotify:
+  user: xxxxxxxxxxxxxx
+  pass: xxxxxxxxxxxxxx
+
+Playlists:
+
+  Globals:
+    - xxxxxxxxxxxxxxxx
+
+  Users:
+  
+    user1:
+      name: name
+      playlists:
+        - xxxxxxxxxxxx
+        - xxxxxxxxxxx

@@ -1,18 +1,38 @@
-
+import random
 
 def exceptions():
     pass
 
-def randPlist(plists, tracklim = 50, glob = list(), globlim = 50):
+def randPlist(plists, tracklim = 50, globs = list(), globlim = 50):
     # Creates random playlist from set of users
 
+    plist_final = []
+
     # Randomize each plist
+    for x in range(len(plists)):
+        random.shuffle(plists[x])
+    random.shuffle(glob)
 
     # Take $tracklim out of each list at a time & $globlim from $glob
+    # for ind, value in enumerate(plists):
+    for x in range(len(plists)):
+        try:
+            plist_final.append(plists[x[:tracklim]])
+        except:
+            plist_final.append(plists[x])
+
+    for x in range(len(globs)):
+        try:
+            plist_final.append(globs[x[:globlim]])
+        except:
+            plist_final.append(globs[x])
+
+    # Check for full length,
+    # TODO Later: fill in missing tracks with globs
 
     # Randomize and return
-
-    pass
+    random.shuffle(plist_final)
+    return plist_final
 
 
 # def mixComb():
@@ -21,6 +41,8 @@ def randPlist(plists, tracklim = 50, glob = list(), globlim = 50):
 def dailyMix(plists, tracklim, glob, globlim, days, exceptions = False):
     # Creates a daily mix playlist for a set number of days
     
+    
+
     pass
 
 def dupCheck():
