@@ -1,4 +1,5 @@
 import random
+import math
 
 def exceptions():
     pass
@@ -11,7 +12,9 @@ def randPlist(plists, tracklim = 50, globs = list(), globlim = 50):
     # Randomize each plist
     for x in range(len(plists)):
         random.shuffle(plists[x])
-    random.shuffle(glob)
+        
+    for x in range(len(globs)):
+        random.shuffle(globs[x])
 
     # Take $tracklim out of each list at a time & $globlim from $glob
     # for ind, value in enumerate(plists):
@@ -38,12 +41,33 @@ def randPlist(plists, tracklim = 50, globs = list(), globlim = 50):
 # def mixComb():
 #     pass
 
-def dailyMix(plists, tracklim, glob, globlim, days, exceptions = False):
+def dailyMix(plists, tracklim = 50, globs = list(), globlim = 50, days = 1, exceptions = False):
     # Creates a daily mix playlist for a set number of days
-    
-    
+    plists_SP = []
+    plists_mixed = []
 
-    pass
+    # Splits the playlists into sets of days
+    for plist in plists:
+        random.shuffle(plist)
+        length = len(plist)
+        lengthD = math.floor(length/days)
+
+        plist_tmp = []
+        i = 0
+        while i < days-1:
+            plist_tmp.append(plist[i*lengthD:i*lengthD+lengthD])
+            i += 1
+        plists_SP.append(plists_SP)
+
+    i = 1
+    while i < days:
+        plist_tmp = []
+        for plist in plists:
+            plist_tmp.append(plist[i-1])
+        plists_mixed.append(randPlist(plist_tmp, tracklim, globs, globlim))
+        i += 1
+
+    return plists_mixed
 
 def dupCheck():
     pass

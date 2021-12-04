@@ -6,7 +6,8 @@
 ## Folder structure
 - `src/` 
   - `conf/` Module for R/W configuration files
-    - `configRW` Handles R/W of config
-  - `fetch/` Module for sending and reciving data to spotify
-    - `spFetch` Fetches spotify data
-  - `creator/` Module for differnt mix algorthims
+    - `configRW.py` Handles R/W of config
+  - `fetch/` Module for sending and receiving data to spotify
+    - `spFetch.py` Fetches spotify data
+  - `creator/` Module for different mix algorithms
+    - `mix.py` Mixes playlists

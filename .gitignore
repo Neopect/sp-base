@@ -1,8 +1,3 @@
-config/
-testing.py
-testing/
-pNotes.md 
-configure/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -142,10 +137,20 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# User specific data
 .secret
-
 .vscode/
 
+# Testing folders
 src/tests/
+testing.py
+testing/
 
+# Personal notes and experiments
 easyGen/
+pNotes.md 
+
+# Config files
+config/
+configure/
+configure-old/

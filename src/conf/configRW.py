@@ -32,15 +32,17 @@ def genConfig(root, rootConfig):
     # Creates the basic config file for saving
     # and reading data for the program.
     print("Generating config folder...")
+    path = os.path.join(root, "conf/")
+
     os.mkdir(rootConfig)
+    os.chdir(path)
 
     print("Generating config file...")
-    shutil.copy('sample_config.yml', rootConfig+'config.yml')
+    shutil.copy('sample_config.yml', rootConfig+'/config.yml')
 
     os.chdir(rootConfig)
     os.mkdir('plists')
 
-    
 
 # def readConfig(root, rootConfig):
 #     # Reads config file and sets them
