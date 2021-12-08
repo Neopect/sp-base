@@ -142,7 +142,7 @@ cython_debug/
 .vscode/
 
 # Testing folders
-src/tests/
+# src/tests/
 testing.py
 testing/
 
