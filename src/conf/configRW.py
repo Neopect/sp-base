@@ -14,7 +14,7 @@ def genConfig(root, rootConfig):
     # Creates the basic config file for saving
     # and reading data for the program.
     print("Generating config folder...")
-    path = os.path.join(root, "../conf/")
+    path = os.path.join(root, "../../conf/")
 
     os.mkdir(rootConfig)
     os.chdir(path)
