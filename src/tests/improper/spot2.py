@@ -2,6 +2,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import sys
 import os
+import json
 
 sys.path.insert(0, 'src/conf')
 sys.path.insert(0, 'src/fetch')
@@ -32,3 +33,15 @@ conf.configRunner(root, rootConfig)
 
 # Fetch downloads
 # fetch.downloadConf(fetchSP(scopes[1]), rootPlists)
+
+
+def demo(sp):
+    results = sp.playlist_tracks('19KX8W1u6IFejEbWxZpGxo',
+                                limit=1,
+                                market="US")
+    x = json.dumps(results, indent=4)
+    print(x)
+
+demo(fetchSP(scopes[1]))
+
+# 19KX8W1u6IFejEbWxZpGxo
