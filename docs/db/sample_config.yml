@@ -14,3 +14,9 @@ Playlists:
       playlists:
         - xxxxxxxxxxxx
         - xxxxxxxxxxx
+
+Links:
+  db: ./path/to/file
+  plist: ./path/to/folder
+  groupplaylist: ./path/to/file # Leave blank if in plist folder
+  userplaylist: ./path/to/file # Leave blank if in plist folder
