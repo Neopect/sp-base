@@ -23,6 +23,11 @@ def customCommand(message):
     with conn:
         cur = conn.cursor()
         cur.execute(message)
+    rows = cur.fetchall()
+
+    for row in rows:
+        print(row)
+    return rows
 
 # == SAMPLE FUNCTION ==
 # def select_task_by_priority(conn, priority):
@@ -39,18 +44,3 @@ def customCommand(message):
 
 #     for row in rows:
 #         print(row)
-
-
-def showdb(conn):
-    """
-    Query all rows in the tasks table
-    :param conn: the Connection object
-    :return:
-    """
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM users")
-
-    rows = cur.fetchall()
-
-    for row in rows:
-        print(row)

@@ -31,15 +31,18 @@ def addPlist(plist, owner):
                 item = str(item).replace('"',"")
 
             items += str(item) + '", "'
-        plist_conv += items + song[4] +  '", "' + owner + '")'
+        plist_conv += items + song[4] +  '", "' + owner + '")' # TODO Make the plist reflect the actual plist uri
         first = False
     plist_conv += ';'
     print(plist_conv)
+
     conn = db.create_connection(database)
     with conn:
         cur = conn.cursor()
-        cur.execute("INSERT INTO songs (song, artist, time, explicit, spotid, previewurl, genre, mood, plist, owner) VALUES ?", (plist_conv,))
-    pass
+        prefix = "INSERT INTO songs (song, artist, time, explicit, spotid, previewurl, genre, mood, plist, owner) VALUES "
+        command = prefix + plist_conv # This is a really stupid way to solve the issue but it works, so ha
+        cur.execute(command)
+    
 
 def deletePlist(plist='NULL', owner='NULL'):
     global database
@@ -49,7 +52,7 @@ def deletePlist(plist='NULL', owner='NULL'):
         if plist != 'NULL':
             cur.execute("DELETE FROM songs WHERE plist = ?", (plist,))
         else:
-            cur.execute("DELETE FROM songs WHERE owner = ?", (user,))
+            cur.execute("DELETE FROM songs WHERE owner = ?", (owner,))
 
 def listSongs():
     global database

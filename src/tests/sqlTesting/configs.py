@@ -11,6 +11,7 @@ import spFetch as fetch
 # import configRW as conf
 import dbUsers as dbUser
 import dbSongs as dbSongs
+import db as db
 
 
 scopes = ['user-library-read', 'playlist-read-private']
@@ -45,7 +46,12 @@ def testList1():
     print('User good')
     dbSongs.addPlist(fetch.downloadPlist(fetchSP(scopes[1]), '3Lyo7q26TJfwuH7JtvTAaO'), 'Tyler')
 
-testList1()
+
+
+# testList1()
+dbSongs.deletePlist(owner='Tyler')
+
+# db.customCommand('SELECT * FROM users')
 
 # https://open.spotify.com/playlist/6V5grGhvcAyNoBWvoct1wF?si=
 # https://open.spotify.com/playlist/3Lyo7q26TJfwuH7JtvTAaO?si=0a6380e4c36441d9
