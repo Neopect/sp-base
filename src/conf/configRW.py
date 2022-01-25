@@ -8,7 +8,7 @@ import yaml
 spCred = []
 gPlayl = []
 playl = []
-users = []
+# users = []
 
 def genConfig(root, rootConfig):
     # Creates the basic config file for saving
@@ -28,7 +28,8 @@ def genConfig(root, rootConfig):
 def readConfig(rootConfig):
     # Reads config file and sets them
     # in the interrupter's memory
-    global spCred, users,  gPlayl, playl
+    global spCred, gPlayl, playl
+    # global spCred, users,  gPlayl, playl
     os.chdir(rootConfig)
 
     with open("config.yml", "r") as ymlconf:
@@ -50,10 +51,13 @@ def readConfig(rootConfig):
     for x in conf["Playlists"]["Users"]:
         ent = conf["Playlists"]["Users"][x]
         print(ent)
-        users.append(ent["name"])
+        # users.append(ent["name"])
+        tmpPlist = []
         for y in ent["playlists"]:
             print("Adding to playlists... " + y)
-            playl.append([y, ent["name"]])
+            tmpPlist.append(y)
+
+        playl.append([ent["name"], tmpPlist])
 
      
 def configRunner(root, rootConfig):
