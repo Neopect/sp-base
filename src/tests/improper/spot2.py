@@ -5,9 +5,9 @@ import os
 import json
 
 sys.path.insert(0, 'src/conf')
-sys.path.insert(0, 'src/fetch')
+sys.path.insert(0, 'src/connect')
 
-import configRW as conf
+# import configRW as conf
 import spFetch as fetch
 
 scopes = ['user-library-read', 'playlist-read-private']
@@ -29,14 +29,14 @@ def fetchSP(scoper):
 # fetch.downloadLiked(fetchSP(scopes[0]), rootConfig)
 
 # Run config
-conf.configRunner(root, rootConfig)
+# conf.configRunner(root, rootConfig)
 
 # Fetch downloads
 # fetch.downloadConf(fetchSP(scopes[1]), rootPlists)
 
 
 def demo(sp):
-    results = sp.playlist_tracks('19KX8W1u6IFejEbWxZpGxo',
+    results = sp.playlist_tracks('spotify:playlist:3PGHzE2Tqab3V5xH6JyVcW',
                                 limit=1,
                                 market="US")
     x = json.dumps(results, indent=4)
@@ -45,3 +45,4 @@ def demo(sp):
 demo(fetchSP(scopes[1]))
 
 # 19KX8W1u6IFejEbWxZpGxo
+# https://open.spotify.com/playlist/3PGHzE2Tqab3V5xH6JyVcW?si=622060de03084de3

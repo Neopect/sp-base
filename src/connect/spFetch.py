@@ -1,8 +1,8 @@
 import os.path
 import json
 import sys
-sys.path.insert(0, 'src/conf')
-import configRW as config
+# sys.path.insert(0, 'src/conf')
+# import configRW as config
 
 def show_tracks(results):
     # Complies results into the proper format as a python list
@@ -10,12 +10,19 @@ def show_tracks(results):
         plist_temp = []
         for item in results['items']:
             track = item['track']
-            plist_temp.append([track['name'], track['artists'][0]['name'], track['id'], ['default-gen'], ['default-mood']])
+            plist_temp.append([track['name'], 
+                            track['artists'][0]['name'], 
+                            track['duration_ms'], 
+                            track['explicit'], 
+                            track['id'], 
+                            track['preview_url'], 
+                            ['default-gen'], 
+                            ['default-mood']])
         return plist_temp
 
 
 
-def downloadPlist(sp, pid, name, path):
+def downloadPlist(sp, pid):
     # Creates the random playlists
 
     plist_temp = []
@@ -25,13 +32,10 @@ def downloadPlist(sp, pid, name, path):
         print("Downloading playlist info...")
         results = sp.playlist_tracks(pid,
                                     offset=ofs,
-                                    fields='playlist_id,fields="items(track(name,artists(name),id,href)),total',
+                                    fields='playlist_id,fields="items(track(name,artists(name),duration_ms,explicit,id,preview_url)),total',
                                     market="US")
         
-        if len(results['items']) == 0: # If no more items in list, then write to json
-            os.chdir(path)
-            with open("playlist_dl_"+name+".json", "w") as fw:
-                fw.write(json.dumps(plist_temp, indent=4))
+        if len(results['items']) == 0: # If no more items in list, then stop
             break
         
         print("Adding tracks to memory...")

@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 
+database = '/home/tylerm/git/sp-base/test2'
 
 def create_connection(db_file):
     """ create a database connection to the SQLite database
@@ -15,6 +16,13 @@ def create_connection(db_file):
         print(e)
 
     return conn
+
+def customCommand(message):
+    global database
+    conn = create_connection(database)
+    with conn:
+        cur = conn.cursor()
+        cur.execute(message)
 
 # == SAMPLE FUNCTION ==
 # def select_task_by_priority(conn, priority):
@@ -46,26 +54,3 @@ def showdb(conn):
 
     for row in rows:
         print(row)
-
-# def main():
-#     database = '/home/tylerm/git/sp-base/test2'
-
-#     # create a database connection
-#     conn = create_connection(database)
-#     with conn:
-#         print("1. Query task by priority:")
-#         select_task_by_priority(conn, 1)
-
-#         print("2. Query all tasks")
-#         select_all_tasks(conn)
-
-
-# if __name__ == '__main__':
-#     main()
-
-database = '/home/tylerm/git/sp-base/test2'
-
-# create a database connection
-# conn = create_connection(database)
-# showdb(conn)
-# conn.close()
