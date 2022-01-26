@@ -1,5 +1,7 @@
 import sys
 import os
+
+from numpy import number
 # import json
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
@@ -13,6 +15,8 @@ import dbUsers as dbUser
 import dbSongs as dbSongs
 import db as db
 
+global numbers
+numbers = 2
 
 scopes = ['user-library-read', 'playlist-read-private']
 
@@ -48,7 +52,7 @@ def testList1():
 
 
 
-testList1()
+# testList1()
 # dbSongs.deletePlist(owner='Tyler')
 
 # db.customCommand('SELECT * FROM users')

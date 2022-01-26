@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 
+global database 
 database = '/home/tylerm/git/sp-base/test2'
 
 def create_connection(db_file):

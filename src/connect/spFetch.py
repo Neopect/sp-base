@@ -65,17 +65,3 @@ def downloadLiked(sp, path):
         fw.write(json.dumps(plist_temp, indent=4))
 
 
-
-def downloadConf(sp, path, updated = False, globs = True, users = True):
-    # Goes through each playlist in config and downloads it data with `downloadPlist`
-
-    if globs == True:
-        for x, val in enumerate(config.gPlayl):
-            print("Opening universal playlists...")
-            downloadPlist(sp, val, 'gobal_'+ str(x), path)
-
-    if users == True:
-        for x, val in enumerate(config.playl):
-            print("Opening personal playlists...")
-            downloadPlist(sp, val, 'user_'+ str(x), path)
-    

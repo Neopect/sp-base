@@ -16,3 +16,7 @@ if '"' in item:
                 item = item.replace('"',"")
                 print('yes')
 print(item)
+
+
+import configs
+print(configs.numbers)

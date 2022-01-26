@@ -3,12 +3,9 @@ import sys
 sys.path.insert(0, '../conf')
 import db as db
 
-database = '/home/tylerm/git/sp-base/test2'
-
 
 def fetchPlist(owner='', plist=''):
-    global database
-    conn = db.create_connection(database)
+    conn = db.create_connection(db.database)
     with conn:
         cur = conn.cursor()
         if owner != '':
