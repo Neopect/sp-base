@@ -9,6 +9,7 @@ def exceptions():
 def randPlist(users, tracklim = 50, explicit = False):
     # Creates random playlist from set of users
     plists = []
+    plist_final = []
 
     # Append playlists from user
     for x in users:
@@ -17,6 +18,17 @@ def randPlist(users, tracklim = 50, explicit = False):
     # Randomize each plist
     for x in range(len(plists)):
         random.shuffle(plists[x])
+
+    # Take $tracklim out of each list at a time
+    for x in range(len(plists)):
+        try:
+            plist_final.append(plists[x[:tracklim]])
+        except:
+            plist_final.append(plists[x])
+
+    # Randomize and return
+    random.shuffle(plist_final)
+    return plist_final
 
 
 
