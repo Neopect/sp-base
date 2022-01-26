@@ -28,9 +28,9 @@ def fetchSP(scoper):
 # fetch.downloadConf(fetchSP(scopes[1]), rootPlists)
 
 
-def download(sp, pid):
-    results = sp.playlist_tracks(pid)
-    print(json.dumps(results, indent=4))
+# def download(sp, pid):
+#     results = sp.playlist_tracks(pid)
+#     print(json.dumps(results, indent=4))
 
 
 # download(fetchSP(scopes[1]), '6V5grGhvcAyNoBWvoct1wF')
@@ -48,8 +48,8 @@ def testList1():
 
 
 
-# testList1()
-dbSongs.deletePlist(owner='Tyler')
+testList1()
+# dbSongs.deletePlist(owner='Tyler')
 
 # db.customCommand('SELECT * FROM users')
 

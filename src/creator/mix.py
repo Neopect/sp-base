@@ -1,8 +1,24 @@
 import random
 import math
+import dbCreator as db
 
 def exceptions():
     pass
+
+
+def randPlist(users, tracklim = 50, explicit = False):
+    # Creates random playlist from set of users
+    plists = []
+
+    # Append playlists from user
+    for x in users:
+        plists.append(db.fetchPlist(x))
+
+    # Randomize each plist
+    for x in range(len(plists)):
+        random.shuffle(plists[x])
+
+
 
 def randPlist(plists, tracklim = 50, globs = list(), globlim = 50):
     # Creates random playlist from set of users

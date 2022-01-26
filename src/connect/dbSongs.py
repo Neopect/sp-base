@@ -1,6 +1,3 @@
-# The purpose of this file is to update the database with the yaml file
-
-# import configRW
 import sys
 sys.path.insert(0, 'src/conf')
 import db as db
@@ -31,7 +28,7 @@ def addPlist(plist, owner):
                 item = str(item).replace('"',"")
 
             items += str(item) + '", "'
-        plist_conv += items + song[4] +  '", "' + owner + '")' # TODO Make the plist reflect the actual plist uri
+        plist_conv += items + owner + '")' # TODO Make the plist reflect the actual plist uri
         first = False
     plist_conv += ';'
     print(plist_conv)

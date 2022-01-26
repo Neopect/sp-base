@@ -4,7 +4,7 @@ import sys
 # sys.path.insert(0, 'src/conf')
 # import configRW as config
 
-def show_tracks(results):
+def show_tracks(results, pid):
     # Complies results into the proper format as a python list
 
         plist_temp = []
@@ -15,9 +15,10 @@ def show_tracks(results):
                             track['duration_ms'], 
                             track['explicit'], 
                             track['id'],
-                            track['preview_url'], 
-                            ['default-gen'], 
-                            ['default-mood']])
+                            track['preview_url'],
+                            'default-gen,', 
+                            'default-mood,',
+                            pid])
         return plist_temp
 
 
@@ -39,7 +40,7 @@ def downloadPlist(sp, pid):
             break
         
         print("Adding tracks to memory...")
-        plist_temp = plist_temp + show_tracks(results)
+        plist_temp = plist_temp + show_tracks(results, pid)
 
         ofs = ofs + len(results['items'])
 
