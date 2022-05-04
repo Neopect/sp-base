@@ -1,6 +1,4 @@
 import unittest
-import spotipy
-# import spprams
 import src.connect.spprams as spprams
 import src.connect.spFetch as spFetch
 
@@ -10,7 +8,7 @@ class TestspFetch(unittest.TestCase):
     sp = spprams.sp
 
     def test_connection(self):
-        # sp = spprams.sp
+        
         congrats_uri = 'spotify:track:6kblAEj0T0312fv5QWsXzo'
         results = sp.track(congrats_uri, market="US")
         
@@ -18,13 +16,11 @@ class TestspFetch(unittest.TestCase):
         self.assertTrue(str(results).__contains__("Congratulations"), msg = message)
 
     def test_download(self):
-        # sp = spprams.sp
 
         plist_uri = 'spotify:playlist:5btwrnSd9riqzzfLN6vfML'
         results = spFetch.downloadPlist(sp, plist_uri)
 
         message = "Spotify does not have proper authorization to do this"
-
         self.assertTrue(str(results).__contains__("I'm Leaving"), msg = message)
 
         

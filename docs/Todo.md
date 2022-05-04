@@ -3,7 +3,8 @@
 - [ ] Finish Test cases
 - [ ] Create mix playlist
 - [ ] Create upload feature
-  - [ ] Modify instead of create
+  - [ ] Creating playlists
+  - [ ] Modifying current playlists
 - [ ] Debug any issues
 - [ ] Optimize
 - [ ] Clean code
