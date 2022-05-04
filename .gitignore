@@ -142,14 +142,11 @@ cython_debug/
 .vscode/
 .idea/
 .obsidian/
+SPA_VS.code-workspace
 
-# Testing folders
-# src/tests/
+# Testing files
 dumy.py
 _dumy.py
-
-# Personal notes and experiments
-pNotes.md 
 
 # Config files
 spprams.py
