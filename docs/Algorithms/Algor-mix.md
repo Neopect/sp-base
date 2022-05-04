@@ -11,7 +11,7 @@
   - MIU Exceptions (Same as main, but has variants without people)
 - Daily Rotation (Creates master playlist, then breaks it apart into multiple sequences)
 
-# Playlist folder structure
+## Playlist folder structure
 - Bot
   - Master Mix it up
     - Everyone

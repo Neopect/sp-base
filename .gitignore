@@ -141,11 +141,13 @@ cython_debug/
 .secret
 .vscode/
 .idea/
+.obsidian/
 
 # Testing folders
 # src/tests/
 testing.py
 testing/
+dumy.py
 
 # Personal notes and experiments
 easyGen/
@@ -155,4 +157,4 @@ pNotes.md
 config/
 configure/
 configure-old/
-
+spprams.py
