@@ -145,16 +145,12 @@ cython_debug/
 
 # Testing folders
 # src/tests/
-testing.py
-testing/
 dumy.py
+_dumy.py
 
 # Personal notes and experiments
-easyGen/
 pNotes.md 
 
 # Config files
-config/
-configure/
-configure-old/
 spprams.py
+_spprams.py
