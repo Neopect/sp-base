@@ -17,11 +17,16 @@ class TestspFetch(unittest.TestCase):
 
     def test_download(self):
 
-        plist_uri = 'spotify:playlist:5btwrnSd9riqzzfLN6vfML'
-        results = spFetch.downloadPlist(sp, plist_uri)
+        plist_uris = ['spotify:playlist:5btwrnSd9riqzzfLN6vfML', 'spotify:playlist:4gXwZxo4lWpGoQmU3WD63g', 'spotify:playlist:2YothbbzcjcLnGX46WqHuT']
 
+        results = spFetch.downloadPlist(sp, plist_uris[0])
         message = "Spotify does not have proper authorization to do this"
         self.assertTrue(str(results).__contains__("I'm Leaving"), msg = message)
+
+        results = spFetch.downloadPlist(sp, plist_uris[1])
+        message = "Spotify was not able to get the remaining tracks from the playlist"
+        print(results)
+        self.assertTrue(str(results).__contains__("The Wanderer"), msg = message)
 
         
 
@@ -32,3 +37,5 @@ class TestspFetch(unittest.TestCase):
 # 13 song plist https://open.spotify.com/playlist/5btwrnSd9riqzzfLN6vfML?si=2b5efbd32e4c4414
 
 # 213 song plist https://open.spotify.com/playlist/4gXwZxo4lWpGoQmU3WD63g?si=e4da5a88f93740c8
+
+# 149 song plist https://open.spotify.com/playlist/2YothbbzcjcLnGX46WqHuT?si=4bc726b042014e80
