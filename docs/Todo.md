@@ -1,6 +1,9 @@
 # TODOs
 
 - [ ] Finish Test cases
+  - [ ] Pull
+  - [ ] Push
+  - [ ] Mix
 - [ ] Create mix playlist
 - [ ] Create upload feature
   - [ ] Creating playlists

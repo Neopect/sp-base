@@ -145,8 +145,9 @@ cython_debug/
 SPA_VS.code-workspace
 
 # Testing files
-dumy.py
-_dumy.py
+dumy**.py
+_dumy**.py
+.notes*
 
 # Config files
 spprams.py
