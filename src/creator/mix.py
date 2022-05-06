@@ -1,6 +1,5 @@
 import random
 import math
-import dbCreator as db
 
 
 def dupCheck(plist):
@@ -27,9 +26,10 @@ def explicit_check(plists, single=False):
 def randPlist(plists, tracklim = 50, explicit = True):
     # Creates random playlist from set of users
     # TODO Add playlist max limit
+    # TODO Add bias
     plist = []
 
-    #TODO Dup check
+    # Dup check
     plists = dupCheck(plists)
 
     # Explicit check
@@ -51,19 +51,12 @@ def randPlist(plists, tracklim = 50, explicit = True):
 
 
 
-def dailyMix(users, prePlist, tracklim = 50, explicit = True, days = 2):
+def dailyMix(plists, tracklim = 50, explicit = True, days = 2):
     
-    plists, plist_sep, plists_mixed = []
+    plist_sep, plists_mixed = []
 
-    # Either copy or append playlists from user
-    if prePlist != None or prePlist != []:
-        plists = prePlist
-    else:
-        for x in users:
-            plists.append(db.fetchPlist(x))
-
-
-    #TODO Dup check
+    # Dup check
+    plists = dupCheck(plists)
 
     # Explicit check
     if explicit == True:
@@ -83,13 +76,14 @@ def dailyMix(users, prePlist, tracklim = 50, explicit = True, days = 2):
             i += 1
         plist_sep.append(plist_tmp)
 
+
     # Combines each playlist into one
     i = 1
     while i < days:
         plist_tmp = []
         for plist in range(len(plists)):
             try:
-                plist_tmp.append(plist_sep[plist][i-1][:tracklim])
+                plist_tmp.append(plist_sep[plist][i-1][:tracklim]) # Test if appends properly
             except:
                 plist_tmp.append(plist_sep[plist][i-1])
         

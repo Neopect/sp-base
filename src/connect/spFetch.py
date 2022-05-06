@@ -38,6 +38,7 @@ def downloadPlist(sp, pid):
         print("Adding tracks to memory...")
         plist_temp = plist_temp + show_tracks(results)
 
+
         ofs = ofs + len(results['items'])
 
     return plist_temp
